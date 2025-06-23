@@ -54,10 +54,15 @@ function isMisspelled(word) {
 
 
 function showMisspelledWords(words) {
-  const feedback = document.getElementById('feedback');
-  feedback.innerHTML = ''; // Clear old content
+  console.log("📢 Words received:", words); // <--- add this
 
-  if (words.length === 0) return; // No errors
+  const feedback = document.getElementById('feedback');
+  feedback.innerHTML = '';
+
+  if (words.length === 0) {
+    console.log("✅ All words are correct");
+    return;
+  }
 
   const message = document.createElement('p');
   message.textContent = 'These words are not in the Basic English dictionary:';
@@ -72,10 +77,15 @@ function showMisspelledWords(words) {
 
   feedback.appendChild(list);
 
-  // Show "Add word" button for the first misspelled word
+  // Show add-to-dictionary button
   const addButton = document.getElementById('add-word-button');
-  addButton.style.display = 'inline-block';
-  addButton.dataset.word = words[0]; // store the first misspelled word
+  if (!addButton) {
+    console.error("❌ Button not found!");
+  } else {
+    console.log("✅ Button found, showing it for:", words[0]);
+    addButton.style.display = 'inline-block';
+    addButton.dataset.word = words[0];
+  }
 }
 
 
