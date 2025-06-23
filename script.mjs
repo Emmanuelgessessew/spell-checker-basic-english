@@ -51,11 +51,32 @@ function isMisspelled(word) {
   return !dictionary.includes(word);
 }
 
+function showMisspelledWords(words) {
+  const feedback = document.getElementById('feedback');
+  feedback.innerHTML = ''; // Clear old content
+
+  if (words.length === 0) return; // No errors
+
+  const message = document.createElement('p');
+  message.textContent = 'These words are not in the Basic English dictionary:';
+  feedback.appendChild(message);
+
+  const list = document.createElement('ul');
+  words.forEach(word => {
+    const item = document.createElement('li');
+    item.innerHTML = `<strong>${word}</strong>`;
+    list.appendChild(item);
+  });
+
+  feedback.appendChild(list);
+}
+
 // Event listener
 document.getElementById('check-button').addEventListener('click', () => {
   const inputText = document.getElementById('text-input').value;
   const words = extractWords(inputText);
-
   const misspelled = words.filter(word => isMisspelled(word));
-  console.log('❌ Misspelled words:', misspelled);
+  showMisspelledWords(misspelled);
 });
+
+
