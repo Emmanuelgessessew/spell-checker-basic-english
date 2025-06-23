@@ -39,9 +39,23 @@ function extractWords(text) {
     .flat()
     .filter(word => word.length > 0);      // Remove empty strings
 }
+
+
+function isMisspelled(word) {
+  if (!word) return false;
+
+  // Treat capitalized words as always valid (e.g. names like London)
+  const isCapitalized = /^[A-Z]/.test(word);
+  if (isCapitalized) return false;
+
+  return !dictionary.includes(word);
+}
+
 // Event listener
 document.getElementById('check-button').addEventListener('click', () => {
   const inputText = document.getElementById('text-input').value;
   const words = extractWords(inputText);
-  console.log('🧠 Extracted words:', words);
+
+  const misspelled = words.filter(word => isMisspelled(word));
+  console.log('❌ Misspelled words:', misspelled);
 });
