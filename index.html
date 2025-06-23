@@ -1,22 +1,39 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Check your sentences using Basic English. Highlights misspelled words and lets you add new words to your dictionary.">
+
     <title>Basic English Spell Checker</title>
-    
   </head>
   <body>
-     <h1>Basic English Spell Checker</h1>
-     <label for="text-input">Enter your text:</label>
-     <br />
-     <textarea id="text-input" rows="5" cols="50" aria-label="Text input for spell checking"></textarea>
-     <br />
-     <button id="check-button">Check Spelling</button>
-     <section id="feedback" aria-live="polite">
-  <!-- Spelling errors will appear here -->
-     </section>
-     <button id="add-word-button" style="display: none;">Add word to dictionary</button>
-     <script type="module" src="script.mjs"></script>
+    <h1>Basic English Spell Checker</h1>
+
+    <label for="text-input">Enter your text:</label>
+    <br />
+    <textarea
+      id="text-input"
+      rows="5"
+      cols="50"
+      aria-label="Text input for spell checking"
+    ></textarea>
+    <br />
+
+    <button id="check-button" aria-label="Check spelling">Check Spelling</button>
+
+    <section id="feedback" aria-live="polite">
+      <!-- Spelling errors will appear here -->
+    </section>
+
+    <button
+      id="add-word-button"
+      style="display: none;"
+      aria-label="Add word to dictionary"
+    >
+      Add word to dictionary
+    </button>
+
+    <script type="module" src="script.mjs"></script>
   </body>
 </html>

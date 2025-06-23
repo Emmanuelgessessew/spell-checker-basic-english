@@ -37,6 +37,11 @@ function showMisspelledWords(words) {
   addButton.dataset.word = words[0];
 }
 
+document.getElementById('text-input').addEventListener('input', () => {
+  document.getElementById('feedback').innerHTML = '';
+  document.getElementById('add-word-button').style.display = 'none';
+});
+
 document.getElementById('check-button').addEventListener('click', () => {
   const inputText = document.getElementById('text-input').value;
   const words = extractWords(inputText);
