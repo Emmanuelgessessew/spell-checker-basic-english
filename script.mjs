@@ -9,8 +9,10 @@ const customDictionary = new Set();
 const dictionary = getDictionary();
 
 window.onload = function () {
-  document.querySelector("body").innerText = `There are ${getDictionarySize()} words in the Basic English dictionary`;
+  const message = document.createElement('p');
+  document.body.prepend(message);
 };
+
 
 function showMisspelledWords(words) {
   const feedback = document.getElementById('feedback');
