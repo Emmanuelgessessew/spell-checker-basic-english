@@ -9,3 +9,18 @@ import getDictionarySize from "./common.mjs";
 window.onload = function() {
     document.querySelector("body").innerText = `There are ${getDictionarySize()} words in the Basic English dictionary`;
 }
+
+let dictionary = [];
+
+async function loadDictionary() {
+  try {
+    const response = await fetch('./words.json');
+    if (!response.ok) throw new Error('Failed to load dictionary');
+    dictionary = await response.json();
+    console.log('✅ Dictionary loaded:', dictionary.slice(0, 10)); // preview first 10
+  } catch (err) {
+    console.error('❌ Error loading dictionary:', err);
+  }
+}
+
+loadDictionary();
