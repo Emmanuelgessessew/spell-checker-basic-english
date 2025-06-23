@@ -11,6 +11,8 @@ window.onload = function() {
 }
 
 let dictionary = [];
+const customDictionary = new Set();
+
 
 async function loadDictionary() {
   try {
@@ -44,12 +46,12 @@ function extractWords(text) {
 function isMisspelled(word) {
   if (!word) return false;
 
-  // Treat capitalized words as always valid (e.g. names like London)
   const isCapitalized = /^[A-Z]/.test(word);
   if (isCapitalized) return false;
 
-  return !dictionary.includes(word);
+  return !dictionary.includes(word) && !customDictionary.has(word);
 }
+
 
 function showMisspelledWords(words) {
   const feedback = document.getElementById('feedback');
@@ -69,7 +71,13 @@ function showMisspelledWords(words) {
   });
 
   feedback.appendChild(list);
+
+  // Show "Add word" button for the first misspelled word
+  const addButton = document.getElementById('add-word-button');
+  addButton.style.display = 'inline-block';
+  addButton.dataset.word = words[0]; // store the first misspelled word
 }
+
 
 // Event listener
 document.getElementById('check-button').addEventListener('click', () => {
@@ -78,5 +86,17 @@ document.getElementById('check-button').addEventListener('click', () => {
   const misspelled = words.filter(word => isMisspelled(word));
   showMisspelledWords(misspelled);
 });
+ 
+
+document.getElementById('add-word-button').addEventListener('click', () => {
+  const button = document.getElementById('add-word-button');
+  const wordToAdd = button.dataset.word;
+  if (wordToAdd) {
+    customDictionary.add(wordToAdd);
+    button.style.display = 'none';
+    document.getElementById('check-button').click(); // re-run spell check
+  }
+});
+
 
 
