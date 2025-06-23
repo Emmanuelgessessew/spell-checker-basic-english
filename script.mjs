@@ -24,3 +24,24 @@ async function loadDictionary() {
 }
 
 loadDictionary();
+
+// Utility: Clean and split text into words
+function extractWords(text) {
+  return text
+    .split(/\s+/)                          // Split by whitespace
+    .map(word =>
+      word
+        .toLowerCase()
+        .replace(/[,.?!":;)]$/g, '')       // Remove punctuation at end
+        .replace(/^[(]/g, '')              // Remove punctuation at start
+        .split('-')                        // Handle hyphenated words
+    )
+    .flat()
+    .filter(word => word.length > 0);      // Remove empty strings
+}
+// Event listener
+document.getElementById('check-button').addEventListener('click', () => {
+  const inputText = document.getElementById('text-input').value;
+  const words = extractWords(inputText);
+  console.log('🧠 Extracted words:', words);
+});
